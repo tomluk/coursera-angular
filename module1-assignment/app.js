@@ -10,6 +10,7 @@ function LunchCheckController($scope) {
 	// $scope.message = "Enjoy";
 
 	$scope.checkData = function() {
+		console.log($scope.data);
 		if ($scope.data == undefined) {
 			$scope.message = "Please enter data first";
 			return;
@@ -27,6 +28,9 @@ function LunchCheckController($scope) {
 		}
 		else if (len > 3){
 			$scope.message = "Too much!";
+		}
+		else if (len == 0){
+			$scope.message = "Please enter data first";
 		}
 	}
 
