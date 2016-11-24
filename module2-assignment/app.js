@@ -31,7 +31,7 @@ function ShoppingListCheckOffService() {
 	var toBuyList = [{name : "bags chips", quantity: 10},
 					 {name : "carrots", quantity: 5},
 					 {name : "beers", quantity: 5},
-					 {name : "bootles of wine", quantity: 2},
+					 {name : "bottles of wine", quantity: 2},
 					 {name : "cakes", quantity: 2}]
 	var boughtList = [];
 
