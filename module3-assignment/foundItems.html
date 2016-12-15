@@ -1,7 +1,7 @@
-<br><br><h3>Title: XXXX</h3>
+<br><br><br>
 <ol>
   <li ng-repeat="item in menu.found">
     {{ item }} 
-    <button ng-click="menu.onRemove({index: $index});">Remove Item</button>
+    <button ng-click="menu.removeItem($index);">Don't want this one</button>
   </li>
 </ol>

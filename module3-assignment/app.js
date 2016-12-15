@@ -4,12 +4,12 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
+.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
+.directive('foundItems', FoundItems);
 
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
-	console.log("HALO");
 	var menu = this;
 	menu.found = [];
 	menu.searchTerm = "";
@@ -23,7 +23,6 @@ function NarrowItDownController(MenuSearchService) {
 		matchedMenuItemsPromise.then(function(found_items){
 			// console.log(found_items);
 			menu.found = found_items;
-			console.log("Returned matchedMenuItems " + menu.found);
 		})
 	}
 }
@@ -46,15 +45,38 @@ function MenuSearchService($http, ApiBasePath){
 	    		}
 	    		var menuElement = (items[index].name).toUpperCase();
 	    		if (menuElement.indexOf(searchTerm) != -1) {
+
+	    			var unique_counter = 0;
+	    			for (var jndex = 0; jndex < found_items.length ; jndex++) {
+	    				if (found_items[jndex].toUpperCase().indexOf(menuElement) != -1) {
+	    					unique_counter = 1;
+	    				}
+	    			}
+	    			if (unique_counter == 0){
 	    			found_items.push(items[index].name);
-	    			// console.log(searchTerm +" "+ items[index].name)
+	    			}
 	    		}
 	    	}
-	    	// console.log(found_items);
 	    	return found_items;	
 	    });
 
   };
+}
+
+function FoundItems() {
+  var ddo = {
+    templateUrl: 'foundItems.html',
+    restrict: "A",
+    scope :  '<',
+
+
+    controller: NarrowItDownController,
+    controllerAs: 'menu',
+    
+    bindToController: true
+  };
+
+  return ddo;
 }
 
 })();
